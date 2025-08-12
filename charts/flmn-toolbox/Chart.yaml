@@ -1,5 +1,5 @@
 apiVersion: v2
-name: flmn-toolbox
+name: toolbox
 description: A toolbox with postgresql, redis, etcd client
 
 type: application

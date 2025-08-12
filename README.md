@@ -1,13 +1,17 @@
-# tb
+# toolbox
 
 ## Build
 
 ```shell
-docker build -t flmn/tb:1.0.0 .
+docker build -t flmn/toolbox:1.0.0 .
 ```
 
 ## Install
 
 ```shell
-kubectl apply -f tb_deploy.yaml
+helm repo add flmn https://flmn.github.io/helm-charts
+helm repo update
+helm search repo toolbox
+helm install flmn-toolbox flmn/toolbox
+helm uninstall flmn-toolbox
 ```

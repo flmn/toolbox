@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: flmn/tb
+  repository: flmn/toolbox
   pullPolicy: IfNotPresent
   # tag is sourced from Chart.yaml's appVersion by default
   tag: ""
