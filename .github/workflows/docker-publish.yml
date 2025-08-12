@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: debian:trixie-slim
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
