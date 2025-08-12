@@ -1,0 +1,36 @@
+name: Publish Helm Chart
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: ./chart
+          config: .cr.yaml
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Publish Helm chart
+        uses: stefanprodan/gh-actions-gh-pages@v1
+        with:
+          branch: gh-pages
+          folder: .cr-release-packages
+          token: ${{ secrets.GITHUB_TOKEN }}
