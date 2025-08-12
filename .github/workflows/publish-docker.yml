@@ -24,7 +24,7 @@ jobs:
 
       - name: Get AppVersion from Chart.yaml
         id: chart
-        run: echo "version=$(yq e '.appVersion' chart/Chart.yaml)" >> $GITHUB_OUTPUT
+        run: echo "version=$(yq e '.version' chart/Chart.yaml)" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
