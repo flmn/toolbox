@@ -29,7 +29,7 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Publish Helm chart
-        uses: stefanprodan/gh-actions-gh-pages@v1
+        uses: stefanprodan/helm-gh-pages@v1
         with:
           branch: gh-pages
           folder: .cr-release-packages
