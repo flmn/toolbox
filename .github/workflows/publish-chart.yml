@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  publish:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
