@@ -19,12 +19,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Install yq
-        run: sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
-
-      - name: Get AppVersion from Chart.yaml
-        id: chart
-        run: echo "version=$(yq e '.version' chart/Chart.yaml)" >> $GITHUB_OUTPUT
+      - name: Get current date
+        id: version
+        run: echo "version=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
@@ -32,5 +29,5 @@ jobs:
           context: .
           push: true
           tags: |
-            flmn/toolbox:${{ steps.chart.outputs.version }}
+            flmn/toolbox:${{ steps.version.outputs.version }}
             flmn/toolbox:latest
