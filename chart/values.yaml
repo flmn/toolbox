@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: flmn/tb
+  pullPolicy: IfNotPresent
+  tag: "20250812"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
