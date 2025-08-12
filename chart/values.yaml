@@ -3,7 +3,8 @@ replicaCount: 1
 image:
   repository: flmn/tb
   pullPolicy: IfNotPresent
-  tag: "20250812"
+  # tag is sourced from Chart.yaml's appVersion by default
+  tag: ""
 
 resources:
   limits:

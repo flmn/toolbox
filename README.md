@@ -3,7 +3,7 @@
 ## Build
 
 ```shell
-docker build -t flmn/tb:$(date +%Y%m%d) .
+docker build -t flmn/tb:1.0.0 .
 ```
 
 ## Install

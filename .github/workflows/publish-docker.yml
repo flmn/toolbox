@@ -1,4 +1,4 @@
-name: Docker Image Build and Push
+name: Publish Docker Image
 
 on:
   workflow_dispatch:
@@ -19,9 +19,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+      - name: Install yq
+        run: sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
+
+      - name: Get AppVersion from Chart.yaml
+        id: chart
+        run: echo "version=$(yq e '.appVersion' chart/Chart.yaml)" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
@@ -29,5 +32,5 @@ jobs:
           context: .
           push: true
           tags: |
-            flmn/tb:${{ steps.date.outputs.date }}
+            flmn/tb:${{ steps.chart.outputs.version }}
             flmn/tb:latest
